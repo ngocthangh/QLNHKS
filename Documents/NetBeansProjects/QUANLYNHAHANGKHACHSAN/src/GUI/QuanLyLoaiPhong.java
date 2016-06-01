@@ -14,6 +14,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.JXTable;
 
 /**
  *
@@ -25,20 +26,20 @@ public class QuanLyLoaiPhong extends javax.swing.JFrame {
      * Creates new form QuanLyLoaiPhong
      */
     DefaultTableModel model;
-    JTable tableLoaiPhong; 
+    JXTable tableLoaiPhong; 
     ArrayList<DTO_LoaiPhong> dsLoaiPhong;
     int rowSelected = -1;
     public QuanLyLoaiPhong() {
         initComponents();
         model = new DefaultTableModel();
-        tableLoaiPhong = new JTable();
+        tableLoaiPhong = new JXTable();
         model.addColumn("STT");
         model.addColumn("Mã Loại Phòng");
         model.addColumn("Tên Loại Phòng");
         model.addColumn("Đơn Giá");
         model.addColumn("Mô Tả");
         tableLoaiPhong.setModel(model);
-        
+        tableLoaiPhong.setEditable(false);
         LoadData();
         PaneLoaiPhong.setViewportView(tableLoaiPhong);
         tableLoaiPhong.addMouseListener(new MouseAdapter(){

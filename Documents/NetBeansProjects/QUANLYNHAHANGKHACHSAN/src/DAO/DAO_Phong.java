@@ -54,7 +54,7 @@ public class DAO_Phong {
             return false;
         }
         finally{
-            ConnectDB.getConnect();
+            ConnectDB.Close();
         }
         return true;
     }

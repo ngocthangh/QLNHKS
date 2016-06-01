@@ -12,32 +12,32 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.JXTable;
 
 /**
  *
  * @author Ngoc Thang
  */
-public class QuanLyDichVu extends javax.swing.JInternalFrame {
+public class QuanLyDichVu extends javax.swing.JFrame {
 
     /**
      * Creates new form QuanLyDichVu
      */
     DefaultTableModel model;
-    JTable tableDichVu; 
+    JXTable tableDichVu; 
     ArrayList<DTO_DichVu> dsDichVu;
     int rowSelected = -1;
     public QuanLyDichVu() {
         initComponents();
         model = new DefaultTableModel();
-        tableDichVu = new JTable();
+        tableDichVu = new JXTable();
         model.addColumn("STT");
         model.addColumn("Mã Dịch Vụ");
         model.addColumn("Tên Dịch Vụ");
         model.addColumn("Đơn Giá");
         tableDichVu.setModel(model);
-        
+        tableDichVu.setEditable(false);
         LoadData();
         PaneDichVu.setViewportView(tableDichVu);
         tableDichVu.addMouseListener(new MouseAdapter(){
@@ -83,8 +83,6 @@ public class QuanLyDichVu extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnClose = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         txtMaDichVu = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -97,20 +95,11 @@ public class QuanLyDichVu extends javax.swing.JInternalFrame {
         btnNhapMoi = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         PaneDichVu = new javax.swing.JScrollPane();
+        btnDelete = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
 
-        btnClose.setText("Close");
-        btnClose.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCloseActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setText("Delete");
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Quản Lý Dịch Vụ");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông Tin Dịch Vụ"));
 
@@ -196,12 +185,26 @@ public class QuanLyDichVu extends javax.swing.JInternalFrame {
                 .addComponent(PaneDichVu, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE))
         );
 
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnClose.setText("Close");
+        btnClose.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCloseActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(224, Short.MAX_VALUE)
+                .addContainerGap(301, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnDelete)
@@ -261,7 +264,7 @@ public class QuanLyDichVu extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Đơn giá phải lớn hơn 0, vui lòng nhập lại!");
             return;
         }
-        
+
         DTO_DichVu monAn = new DTO_DichVu(MaDichVu, TenDichVu, DonGia);
         try {
             DICHVU.InsertNew(monAn);
@@ -275,7 +278,7 @@ public class QuanLyDichVu extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnThemDVActionPerformed
 
     private void btnSuaDVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaDVActionPerformed
-         String MaDichVu = "", TenDichVu = "";
+        String MaDichVu = "", TenDichVu = "";
         double DonGia;
         MaDichVu = txtMaDichVu.getText();
         TenDichVu = txtTenDichVu.getText();
@@ -303,7 +306,7 @@ public class QuanLyDichVu extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Đơn giá phải lớn hơn 0, vui lòng nhập lại!");
             return;
         }
-        
+
         DTO_DichVu monAn = new DTO_DichVu(MaDichVu, TenDichVu, DonGia);
         try {
             DICHVU.Update(monAn);
@@ -339,14 +342,14 @@ public class QuanLyDichVu extends javax.swing.JInternalFrame {
         TenDichVu = tableDichVu.getValueAt(rowSelected, 2).toString();
         if(JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa dịch vụ " + TenDichVu, "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             try {
-            DICHVU.Delete(MaDichVu);
-            LoadData();
-            JOptionPane.showMessageDialog(null,"Xóa dịch vụ thành công!");
-            rowSelected = -1;
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Không thể xóa dịch vụ!");
-            return;
-        }
+                DICHVU.Delete(MaDichVu);
+                LoadData();
+                JOptionPane.showMessageDialog(null,"Xóa dịch vụ thành công!");
+                rowSelected = -1;
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,"Không thể xóa dịch vụ!");
+                return;
+            }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
@@ -354,6 +357,41 @@ public class QuanLyDichVu extends javax.swing.JInternalFrame {
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(QuanLyDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(QuanLyDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(QuanLyDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(QuanLyDichVu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new QuanLyDichVu().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane PaneDichVu;

@@ -18,6 +18,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.JXTable;
 
 /**
  *
@@ -29,20 +30,21 @@ public class QuanLyPhong extends javax.swing.JFrame {
      * Creates new form QuanLyPhong
      */
     DefaultTableModel model;
-    JTable tablePhong; 
+    JXTable tablePhong; 
     ArrayList<DTO_Phong> dsPhong;
     ArrayList<DTO_LoaiPhong> dsLoaiPhong;
     int rowSelected = -1;
     public QuanLyPhong() {
         initComponents();
         model = new DefaultTableModel();
-        tablePhong = new JTable();
+        tablePhong = new JXTable();
         model.addColumn("STT");
         model.addColumn("Mã Phòng");
         model.addColumn("Tên Phòng");
         model.addColumn("Loại Phòng");
         model.addColumn("Tình Trạng");
         tablePhong.setModel(model);
+        tablePhong.setEditable(false);
         LoadLoaiPhong();
         LoadData();
         PanePhong.setViewportView(tablePhong);

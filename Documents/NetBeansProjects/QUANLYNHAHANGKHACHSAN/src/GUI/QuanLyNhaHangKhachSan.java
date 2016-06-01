@@ -84,13 +84,13 @@ public class QuanLyNhaHangKhachSan extends javax.swing.JFrame {
         jDesktopPane1.setLayout(jDesktopPane1Layout);
         jDesktopPane1Layout.setHorizontalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jToolBar2, javax.swing.GroupLayout.DEFAULT_SIZE, 948, Short.MAX_VALUE)
             .addComponent(MainPane)
         );
         jDesktopPane1Layout.setVerticalGroup(
             jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDesktopPane1Layout.createSequentialGroup()
-                .addComponent(MainPane, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
+                .addComponent(MainPane, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jToolBar2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -234,11 +234,15 @@ public class QuanLyNhaHangKhachSan extends javax.swing.JFrame {
 
     private void openMenuItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_openMenuItemActionPerformed
         
-        if(!TabbedPaneMain.isAncestorOf(fPhieuDat.getContentPane())){
-            Icon icon = new ImageIcon(getClass().getResource("/Images/Dat.png"));
-            TabbedPaneMain.addTab("Đặt Phòng", icon, fPhieuDat.getContentPane());   
-        }
-        TabbedPaneMain.setSelectedComponent(fPhieuDat.getContentPane());
+//        if(!TabbedPaneMain.isAncestorOf(fPhieuDat.getContentPane())){
+//            Icon icon = new ImageIcon(getClass().getResource("/Images/Dat.png"));
+//            TabbedPaneMain.addTab("Đặt Phòng", icon, fPhieuDat.getContentPane());   
+//        }
+//        TabbedPaneMain.setSelectedComponent(fPhieuDat.getContentPane());
+        
+        fPhieuDat.setVisible(true);
+        
+        
     }//GEN-LAST:event_openMenuItemActionPerformed
 
     private void menuItemMonAnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemMonAnActionPerformed

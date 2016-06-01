@@ -11,31 +11,27 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Vector;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.JXTable;
 
 /**
  *
  * @author Ngoc Thang
  */
-public class QuanLyMonAn extends javax.swing.JInternalFrame {
+public class QuanLyMonAn extends javax.swing.JFrame {
 
     /**
      * Creates new form QuanLyMonAn
      */
-    
     DefaultTableModel model;
-    JTable tableMonAn; 
+    JXTable tableMonAn; 
     ArrayList<DTO_MonAn> dsMonAn;
     int rowSelected = -1;
-    
     public QuanLyMonAn() {
         initComponents();
         model = new DefaultTableModel();
-        tableMonAn = new JTable();
+        tableMonAn = new JXTable();
         model.addColumn("STT");
         model.addColumn("Mã Món Ăn");
         model.addColumn("Tên Món Ăn");
@@ -57,7 +53,8 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
             }
         });
     }
-    public void LoadData(){
+
+     public void LoadData(){
         if(dsMonAn != null)
             for (int i = 0; i < dsMonAn.size(); i++) {
                 model.removeRow(0);
@@ -86,7 +83,6 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        PaneMonAn = new javax.swing.JScrollPane();
         jPanel1 = new javax.swing.JPanel();
         txtTenMonAn = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -97,9 +93,11 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
         btnThemMonAn = new javax.swing.JButton();
         btnSuaMonAn = new javax.swing.JButton();
         btnNhapMoi = new javax.swing.JButton();
-        btnClose = new javax.swing.JButton();
+        PaneMonAn = new javax.swing.JScrollPane();
         btnDelete = new javax.swing.JButton();
+        btnClose = new javax.swing.JButton();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản Lý Món Ăn");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Thông Tin Món Ăn"));
@@ -168,8 +166,6 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
             }
         });
 
-        btnClose.setText("Close");
-
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -177,13 +173,15 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
             }
         });
 
+        btnClose.setText("Close");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(PaneMonAn, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(269, Short.MAX_VALUE)
+                .addContainerGap(275, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(btnThemMonAn)
@@ -242,7 +240,7 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Đơn giá phải lớn hơn 0, vui lòng nhập lại!");
             return;
         }
-        
+
         DTO_MonAn monAn = new DTO_MonAn(MaMonAn, TenMonAn, DonGia);
         try {
             MONAN.InsertNew(monAn);
@@ -254,18 +252,6 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
             return;
         }
     }//GEN-LAST:event_btnThemMonAnActionPerformed
-
-    private void btnNhapMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapMoiActionPerformed
-        String MaMonAn = "";
-        try {
-            MaMonAn = MONAN.AutoGenerateID();
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Không thể kết nối!");
-        }
-        txtMaMonAn.setText(MaMonAn);
-        txtTenMonAn.setText("");
-        txtDonGia.setText("");
-    }//GEN-LAST:event_btnNhapMoiActionPerformed
 
     private void btnSuaMonAnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuaMonAnActionPerformed
         String MaMonAn = "", TenMonAn = "";
@@ -296,7 +282,7 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Đơn giá phải lớn hơn 0, vui lòng nhập lại!");
             return;
         }
-        
+
         DTO_MonAn monAn = new DTO_MonAn(MaMonAn, TenMonAn, DonGia);
         try {
             MONAN.Update(monAn);
@@ -309,6 +295,18 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnSuaMonAnActionPerformed
 
+    private void btnNhapMoiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNhapMoiActionPerformed
+        String MaMonAn = "";
+        try {
+            MaMonAn = MONAN.AutoGenerateID();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(null,"Không thể kết nối!");
+        }
+        txtMaMonAn.setText(MaMonAn);
+        txtTenMonAn.setText("");
+        txtDonGia.setText("");
+    }//GEN-LAST:event_btnNhapMoiActionPerformed
+
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         String MaMonAn = "", TenMonAn = "";
         double DonGia;
@@ -320,17 +318,52 @@ public class QuanLyMonAn extends javax.swing.JInternalFrame {
         TenMonAn = tableMonAn.getValueAt(rowSelected, 2).toString();
         if(JOptionPane.showConfirmDialog(null, "Bạn có chắc muốn xóa món " + TenMonAn, "Xác nhận", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION){
             try {
-            MONAN.Delete(MaMonAn);
-            LoadData();
-            JOptionPane.showMessageDialog(null,"Xóa món ăn thành công!");
-            rowSelected = -1;
-        } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null,"Không thể xóa món ăn!");
-            return;
-        }
+                MONAN.Delete(MaMonAn);
+                LoadData();
+                JOptionPane.showMessageDialog(null,"Xóa món ăn thành công!");
+                rowSelected = -1;
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null,"Không thể xóa món ăn!");
+                return;
+            }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(QuanLyMonAn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(QuanLyMonAn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(QuanLyMonAn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(QuanLyMonAn.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new QuanLyMonAn().setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JScrollPane PaneMonAn;

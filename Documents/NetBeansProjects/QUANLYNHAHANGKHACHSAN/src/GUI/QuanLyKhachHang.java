@@ -14,6 +14,7 @@ import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import org.jdesktop.swingx.JXTable;
 
 /**
  *
@@ -25,13 +26,13 @@ public class QuanLyKhachHang extends javax.swing.JFrame {
      * Creates new form QuanLyKhachHang
      */
     DefaultTableModel model;
-    JTable tableKhachHang; 
+    JXTable tableKhachHang; 
     ArrayList<DTO_KhachHang> dsKhachHang;
     int rowSelected = -1;
     public QuanLyKhachHang() {
         initComponents();
         model = new DefaultTableModel();
-        tableKhachHang = new JTable();
+        tableKhachHang = new JXTable();
         model.addColumn("Mã Khách Hàng");
         model.addColumn("Tên Khách Hàng");
         model.addColumn("CMND");
@@ -40,7 +41,7 @@ public class QuanLyKhachHang extends javax.swing.JFrame {
         model.addColumn("SĐT");
         model.addColumn("Quốc Tịch");
         tableKhachHang.setModel(model);
-        
+        tableKhachHang.setEditable(false);
         LoadData();
         PaneKhachHang.setViewportView(tableKhachHang);
         tableKhachHang.addMouseListener(new MouseAdapter(){
